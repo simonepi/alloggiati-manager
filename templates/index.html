@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestione Ospiti Casa di Giuly</title>
+</head>
+<body>
+  <h1>Gestione Ospiti Casa di Giuly</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul>
+      {% for category, message in messages %}
+        <li style="color: {{ 'green' if category == 'success' else 'red' }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Carica una schedina</h2>
+  <form action="/" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <input type="submit" value="Carica">
+  </form>
+
+  <!--refresh button-->
+  <form action="/" method="get">
+    <input type="submit" value="Aggiorna" style="margin-top: 10px;background-color: #4CAF50; color: white; border: none; padding: 5px 5px; cursor: pointer;">
+  </form>
+  <h2>File caricati da inviare</h2>
+  <ul>
+    {% for f in filesUploaded %}
+    <li>
+      {{ f }}
+      [<a href="/test/{{ f }}">Test</a>]
+      [<a href="/invia/{{ f }}">Invia</a>]
+    </li>
+    {% endfor %}
+  </ul>
+  <h2>File inviati</h2>
+  <ul>
+    {% for f in filesSchedine %}
+    <li>
+      {{ f }}
+      [<a href="/ricevuta/{{ f }}">Scarica ricevuta e anonimizza</a>]
+      [<a href="/anonimizza/{{ f }}">Anonimizza</a>]
+    </li>
+    {% endfor %}
+  </ul>
+  <h2>Ricevute</h2>
+  <ul>
+    {% for f in filesRicevute %}
+    <li>
+      {{ f }}
+      [<a href="/ricevuta/{{ f }}">Apri</a>]
+    </li>
+    {% endfor %}
+</body>
+</html>

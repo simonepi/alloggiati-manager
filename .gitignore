@@ -1,0 +1,6 @@
+uploaded_files/
+ricevute/
+__pycache__/
+venv/
+*.pyc
+.env
